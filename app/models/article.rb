@@ -1,4 +1,5 @@
-belong_to :user
+class Article < ApplicationRecord
+  belongs_to :user
 
   def to_json(current_user = user)
     {
@@ -10,6 +11,7 @@ belong_to :user
 
   private
 
+  # タイトルからスラッグを生成するメソッド
   def create_slug
     self.slug = title.parameterize
   end

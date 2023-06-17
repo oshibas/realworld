@@ -9,18 +9,19 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
-# スキーマ変更を生SQLで記述せずに、Rubyで作成されたマイグレーション用のDSL（ドメイン固有言語）を用いてテーブルの変更を簡単に記述する。
-# このファイルは、`bin/rails db:schema:load`を実行すると、Railsがスキーマを定義するために使用するソースです。
-ActiveRecord::Schema[7.0].define(version: 0) do
+
+ActiveRecord::Schema[7.0].define(version: 2023_06_17_150537) do
   create_table "articles", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "slug", null: false
+    t.string "slug"
+    t.string "title"
     t.string "description"
     t.text "body"
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false # 作成日時カラム: datetime型でnullを許可しない
-    t.datetime "updated_at", null: false # 更新日時カラム: datetime型でnullを許可しない
-    t.index ["slug"], name: "index_articles_on_slug", unique: true # "slug"カラムに対するユニークインデックス
-    t.index ["user_id"], name: "index_articles_on_user_id" # "user_id"カラムに対するインデックス
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_articles_on_slug"
+    t.index ["user_id"], name: "index_articles_on_user_id"
   end
+
+  add_foreign_key "articles", "users"
 end
