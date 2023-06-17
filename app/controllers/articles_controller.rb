@@ -13,6 +13,11 @@ class ArticlesController < ApplicationController
     render_article
   end
 
+  def index
+    @articles = Article.all
+    render json: { articles: @articles.as_json }
+  end
+
   private
 
   def article_params
