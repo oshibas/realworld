@@ -1,30 +1,56 @@
 class ArticlesController < ApplicationController
-  def create
-    @article = @current_user.articles.new(article_params)
+  before_action :authorize_request # リクエストの認可を行うメソッド
 
-    if @article.save
+  def create # 記事の作成
+    @article = @current_user.articles.new(article_params) # ログインしているユーザーに紐付いた記事を作成する
+
+    if @article.save # 記事の保存に成功した場合
       render json: @article # 保存に成功した場合は記事をJSON形式でレスポンスとして返す
     else
       render json: @article.errors, status: :unprocessable_entity # 保存に失敗した場合はエラーメッセージをJSON形式でレスポンスとして返す
     end
   end
 
-  def show
-    render_article
+  def show # 記事の詳細
+    render_article # 記事をJSON形式でレスポンスとして返す
   end
+
+  def update # 記事の更新
+    unless owner?(@article) # 記事の所有者でない場合はエラーレスポンスを返す
+      render_unauthorized # 例外（認可に失敗した場合）に返すエラーレスポンス'Unauthorized'を生成するメソッド
+    end
+
+    if @article.update(article_params) # 記事の更新に成功した場合は記事をJSON形式でレスポンスとして返す
+      render_article
+    else
+      render json: @article.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy # 記事の削除
+    unless owner?(@article) # 記事の所有者でない場合はエラーレスポンスを返す
+      render_unauthorized # 例外（認可に失敗した場合）に返すエラーレスポンス'Unauthorized'を生成するメソッド
+    end
+
+      @article.destroy # 記事の削除に成功した場合は記事をJSON形式でレスポンスとして返す
+    end
 
   def index
     @articles = Article.all
     render json: { articles: @articles.as_json }
   end
 
-  private
+  private # 以下のメソッドはクラス外から呼び出せない
 
-  def article_params
+  def set_article # 記事のidを取得するメソッド
+    @article = Article.find_by_slug(params[:id]) # 記事のidを取得する
+  end
+
+  def article_params # 記事のパラメーターを取得するメソッド
     params.require(:article).permit(:title, :description, :body)
   end
 
-  def render_article
+  def render_article(user = nil)
     render json: { articles: @article.as_json } # 記事をJSON形式でレスポンスとして返す
   end
 end
