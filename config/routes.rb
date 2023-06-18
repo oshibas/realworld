@@ -16,4 +16,6 @@ Rails.application.routes.draw do
       get 'articles/custom', to: 'articles#custom' # 新しいルート
     end
   end
+
+  put 'articles/:slug', to: 'articles#update' # 記事の更新を処理するためのルート
 end
