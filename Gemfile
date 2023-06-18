@@ -8,7 +8,7 @@ gem 'rspec-rails', '~> 3.5'
 gem "rails", "~> 7.0.5"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails"
+gem "sprockets-rails", "~> 3.2", ">= 3.2.2"
 
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", "~> 1.4"
@@ -17,16 +17,16 @@ gem "sqlite3", "~> 1.4"
 gem "puma", "~> 5.0"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
+gem "importmap-rails" #, "~> 0.7.0"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
+gem "turbo-rails" #, "~> 0.8.5"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
+gem "stimulus-rails" #, "~> 3.0.0"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
+gem "jbuilder" #, "~> 2.11"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -63,10 +63,13 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  gem 'jwt'
-  gem 'factory_girl_rails', '~> 4.0'
+  gem 'jwt' # JSON Web Tokenの生成と検証
+  gem "bcrypt" # パスワードのハッシュ化
+  gem 'factory_bot_rails' # テストデータの作成
   gem 'shoulda-matchers', '~> 3.1'
   gem 'faker'
   gem 'database_cleaner'
+  gem 'rbnacl' # 暗号化ge
+  gem 'openssl', '~> 2.1' # 暗号化
 
 end

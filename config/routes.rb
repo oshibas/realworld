@@ -5,10 +5,12 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :show, :update, :destroy] # ユーザーの作成、表示、更新、削除を処理するためのルート
     resources :articles, param: :slug, only: [:index, :show, :create, :destroy, :update]  # 記事の作成を処理するためのルート（パラメーターとしてスラッグを使用）
 
-    # scope :profiles do # 以下のルートは/profilesの下にある
-    #   get ':username', to: 'profiles#show' # プロフィールの表示を処理するためのルート
-    #   post ':username/follow', to: 'profiles#follow' # プロフィールのフォローを処理するためのルート
-    #   delete ':username/follow', to: 'profiles#unfollow' # プロフィールのフォロー解除を処理するためのルート
+    post "/sign_in", to: "sessions#create"
+
+    scope :profiles do # 以下のルートは/profilesの下にある
+      get ':username', to: 'profiles#show' # プロフィールの表示を処理するためのルート
+      post ':username/follow', to: 'profiles#follow' # プロフィールのフォローを処理するためのルート
+      delete ':username/follow', to: 'profiles#unfollow' # プロフィールのフォロー解除を処理するためのルート
     end
 
     namespace :api do # 以下のルートは/apiの下にある

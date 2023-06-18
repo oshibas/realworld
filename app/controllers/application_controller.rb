@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API # ActionController::APIを継承する
   include JsonWebToken # JsonWebTokenモジュールを読み込む
+  include ActionController::Cookies # Cookieを使用するために必要なモジュールを読み込む
 
   before_action :authorize_request # リクエストの認可を行うメソッド
 
