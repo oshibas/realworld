@@ -1,5 +1,12 @@
 class ArticlesController < ApplicationController
+
   before_action :authorize_request # リクエストの認可を行うメソッド
+  before_action :set_article, only: [:show, :update, :destroy] # 記事の取得を行うメソッド
+
+  def index # 記事の一覧
+    @articles = Article.all # 全ての記事を取得する
+    render json: { articles: @articles.as_json } # 記事をJSON形式でレスポンスとして返す
+  end
 
   def create # 記事の作成
     @article = @current_user.articles.new(article_params) # ログインしているユーザーに紐付いた記事を作成する
@@ -17,7 +24,7 @@ class ArticlesController < ApplicationController
 
   def update # 記事の更新
     unless owner?(@article) # 記事の所有者でない場合はエラーレスポンスを返す
-      render_unauthorized # 例外（認可に失敗した場合）に返すエラーレスポンス'Unauthorized'を生成するメソッド
+      render json: { error: "Unauthorized" }, status: :unauthorized # 例外（認可に失敗した場合）に返すエラーレスポンス'Unauthorized'を生成するメソッド
     end
 
     if @article.update(article_params) # 記事の更新に成功した場合は記事をJSON形式でレスポンスとして返す
@@ -34,11 +41,6 @@ class ArticlesController < ApplicationController
 
       @article.destroy # 記事の削除に成功した場合は記事をJSON形式でレスポンスとして返す
     end
-
-  def index
-    @articles = Article.all
-    render json: { articles: @articles.as_json }
-  end
 
   private # 以下のメソッドはクラス外から呼び出せない
 
