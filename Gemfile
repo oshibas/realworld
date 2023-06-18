@@ -70,6 +70,6 @@ group :development do
   gem 'faker'
   gem 'database_cleaner'
   gem 'rbnacl' # 暗号化ge
-  gem 'openssl', '~> 2.1' # 暗号化
+  gem 'openssl' # 暗号化
 
 end
