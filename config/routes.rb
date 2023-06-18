@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   scope :api do
     post 'users/login', to: 'authentication#login' # ユーザーのログインを処理するためのルート
-    get '/api/articles/:slug', to: 'articles#show' # 記事の表示を処理するためのルート
+    get 'articles/:slug', to: 'articles#show' # 記事の表示を処理するためのルート
     resources :users, only: [:create, :show, :update, :destroy] # ユーザーの作成、表示、更新、削除を処理するためのルート
-    resources :articles, param: :slug, only: %i[index show create] # 記事の作成を処理するためのルート（パラメーターとしてスラッグを使用）
+    resources :articles, param: :slug, only: [:index, :show, :create, :destroy, :update]  # 記事の作成を処理するためのルート（パラメーターとしてスラッグを使用）
 
     scope :profiles do # 以下のルートは/profilesの下にある
       get ':username', to: 'profiles#show' # プロフィールの表示を処理するためのルート
