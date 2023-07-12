@@ -1,5 +1,4 @@
 class ArticlesController < ApplicationController
-
   before_action :authorize_request # リクエストの認可を行うメソッド
   before_action :set_article, only: [:show, :update, :destroy] # 記事の取得を行うメソッド
 
@@ -39,8 +38,8 @@ class ArticlesController < ApplicationController
       render_unauthorized # 例外（認可に失敗した場合）に返すエラーレスポンス'Unauthorized'を生成するメソッド
     end
 
-      @article.destroy # 記事の削除に成功した場合は記事をJSON形式でレスポンスとして返す
-    end
+    @article.destroy # 記事の削除に成功した場合は記事をJSON形式でレスポンスとして返す
+  end
 
   private # 以下のメソッドはクラス外から呼び出せない
 

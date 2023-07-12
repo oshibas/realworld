@@ -1,0 +1,13 @@
+current directory: /Users/ooshibasaori/realworld/vendor/bundle/ruby/3.1.0/gems/json-2.6.3/ext/json
+/Users/ooshibasaori/.rbenv/versions/3.1.3/bin/ruby -I /Users/ooshibasaori/.rbenv/versions/3.1.3/lib/ruby/3.1.0 extconf.rb
+creating Makefile
+
+current directory: /Users/ooshibasaori/realworld/vendor/bundle/ruby/3.1.0/gems/json-2.6.3/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20230712-8433-ej4zji sitelibdir\=./.gem.20230712-8433-ej4zji clean
+
+current directory: /Users/ooshibasaori/realworld/vendor/bundle/ruby/3.1.0/gems/json-2.6.3/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20230712-8433-ej4zji sitelibdir\=./.gem.20230712-8433-ej4zji
+make: Nothing to be done for `all'.
+
+current directory: /Users/ooshibasaori/realworld/vendor/bundle/ruby/3.1.0/gems/json-2.6.3/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20230712-8433-ej4zji sitelibdir\=./.gem.20230712-8433-ej4zji install
